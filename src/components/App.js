@@ -73,7 +73,7 @@ class App extends React.Component {
             <div className="four wide column">
               <Filters 
                 onChangeType={this.onChangeHandler}
-                onPetsFindClick={this.petClickHandler} 
+                onFindPetsClick={this.petClickHandler} 
                 />
             </div>
             <div className="twelve wide column">
