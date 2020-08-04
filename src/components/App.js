@@ -58,6 +58,14 @@ class App extends React.Component {
     }
     }
 
+    onAdoptPet = (petId) => {
+      // this.isAdopted = true
+      let index = this.state.pets.findIndex(pet => pet.id == petId)
+      let newArray = this.state.pets
+      newArray[index].isAdopted = true
+      this.setState({pets: newArray})
+    }
+
   render() {
     return (
       <div className="ui container">
@@ -70,7 +78,10 @@ class App extends React.Component {
               <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser 
+              pets = {this.state.pets}
+              onAdoptPet = {this.onAdoptPet}
+              />
             </div>
           </div>
         </div>
