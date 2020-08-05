@@ -1,76 +1,77 @@
-import React from "react";
+import React from "react"
 
-import Filters from "./Filters";
-import PetBrowser from "./PetBrowser";
+import Filters from "./Filters"
+import PetBrowser from "./PetBrowser"
 
 class App extends React.Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       pets: [],
       filters: {
         type: "all"
       }
-    };
+    }
   }
 
   updateState = (data, type) => {
     this.setState({
       pets: [...data],
       filters: {
-        type: type,
-      },
-    });
-  };
+        type: type
+      }
+    })
+  }
 
   onChangeType = (event) => {
     this.setState({
       filters: {
-        type: event.target.value,
-      },
-    });
-  };
+        type: event.target.value
+      }
+    })
+  }
 
   onFindPetsClick = () => {
-    console.log("button clicked");
+    console.log("button clicked")
 
-    let type = this.state.filters.type;
+    let type = this.state.filters.type
 
     if (type === "cat") {
-      type = "?type=cat";
+      type = "?type=cat"
     } else if (type === "dog") {
-      type = "?type=dog";
+      type = "?type=dog"
     } else if (type === "micropig") {
-      type = "?type=micropig";
+      type = "?type=micropig"
+    } else if (type === 'all'){
+      type = ''
     }
 
     fetch("/api/pets" + type)
       .then((resp) => resp.json())
       .then((pets) => {
         this.setState({
-          pets: [...pets],
-        });
-      });
-  };
+          pets: [...pets]
+        })
+      })
+  }
 
   onAdoptPet = (petId) => {
-    console.log("this is the pet id:", petId);
-    console.log("PETS BEFORE MAP", this.state.pets);
+    console.log("this is the pet id:", petId)
 
     let updatedPetsList = this.state.pets.map((pet) => {
       if (pet.id === petId) {
-        pet.isAdopted = true;
-        return pet;
+        pet.isAdopted = true
+        return pet
       } else {
-        return pet;
+        return pet
       }
-    });
+    })
 
     this.setState({
-      pets: updatedPetsList,
-    });
-  };
+      pets: updatedPetsList
+    })
+  }
 
   render() {
     return (
@@ -92,8 +93,8 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
