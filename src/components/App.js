@@ -10,8 +10,8 @@ class App extends React.Component {
     this.state = {
       pets: [],
       filters: {
-        type: "all",
-      },
+        type: "all"
+      }
     };
   }
 
@@ -43,8 +43,6 @@ class App extends React.Component {
       type = "?type=dog";
     } else if (type === "micropig") {
       type = "?type=micropig";
-    } else {
-      type = "";
     }
 
     fetch("/api/pets" + type)
@@ -59,11 +57,9 @@ class App extends React.Component {
   onAdoptPet = (petId) => {
     console.log("this is the pet id:", petId);
     console.log("PETS BEFORE MAP", this.state.pets);
-    // debugger;
 
     let updatedPetsList = this.state.pets.map((pet) => {
       if (pet.id === petId) {
-        // change the boolean
         pet.isAdopted = true;
         return pet;
       } else {
@@ -71,12 +67,9 @@ class App extends React.Component {
       }
     });
 
-    console.log("PETS AFTER MAP", updatedPetsList);
-
     this.setState({
       pets: updatedPetsList,
     });
-    // debugger;
   };
 
   render() {
